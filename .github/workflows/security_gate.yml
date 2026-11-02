@@ -1,0 +1,21 @@
+name: Forbidden File Security Gate
+
+on:
+  push:
+
+jobs:
+  security-gate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for forbidden files
+        run: |
+          if [ -f passwords.txt ] || [ -f id_rsa ]; then
+            echo "SECURITY ALERT: Forbidden file detected!"
+            exit 1
+          else
+            echo "Security check passed. No forbidden files found."
+          fi
