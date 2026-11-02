@@ -1,0 +1,15 @@
+name: Injection Lockdown Test
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: read
+
+jobs:
+  injection-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Vulnerable issue title
+        run: echo "New issue title is: ${{ github.event.issue.title }}"
